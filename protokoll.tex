@@ -1,0 +1,55 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{listings}
+\usepackage{glossaries}
+\usepackage[
+top    = 2.75cm,
+bottom = 2.00cm,
+left   = 2.50cm,
+right  = 2.00cm]{geometry}
+\setcounter{secnumdepth}{4}
+
+\makeglossaries
+
+\newglossaryentry{os} {name=OS, description={Operating System}}
+
+\begin{document}
+
+
+\tableofcontents
+
+\newpage
+
+\section{Task description}
+
+\section{Working time}
+\subsection{Estimated working time}
+\subsection{Actual time}
+
+ \begin{figure}[here!]
+	\centering
+	%\includegraphics[width=0.8\textwidth]{middleware.jpg}
+	\caption{Communication between highly heterogeneous systems \cite{muede}}
+	\label{fig:anfang}
+	\end{figure}
+\newpage
+\printglossaries
+\listoffigures
+\newpage
+\begin{thebibliography}{56}
+
+\bibitem{thorstenhorn}
+   \textbf{Torsten Horn}\newline
+  \emph{http://www.torsten-horn.de/techdocs/eai.htm}
+  \newline abgerufen am: 05.10.2014, 20:25
+
+
+\end{thebibliography}
+
+\end{document}
+
