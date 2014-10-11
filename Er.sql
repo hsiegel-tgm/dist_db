@@ -1,0 +1,147 @@
+CREATE TABLE Ingredient (
+ ID INT NOT NULL,
+ name VARCHAR(255) NOT NULL,
+ unit INT,
+ price FLOAT
+);
+
+ALTER TABLE Ingredient ADD CONSTRAINT PK_Ingredient PRIMARY KEY (ID);
+
+
+CREATE TABLE Meal (
+ ID INT NOT NULL,
+ name VARCHAR(255) NOT NULL,
+ type INT
+);
+
+ALTER TABLE Meal ADD CONSTRAINT PK_Meal PRIMARY KEY (ID);
+
+
+CREATE TABLE MealIngredient (
+ ID_meal INT NOT NULL,
+ ID_ingredient INT NOT NULL,
+ quantity CHAR(10)
+);
+
+ALTER TABLE MealIngredient ADD CONSTRAINT PK_MealIngredient PRIMARY KEY (ID_meal,ID_ingredient);
+
+
+CREATE TABLE Mensa (
+ ID INT NOT NULL,
+ name CHAR(255),
+ university_name VARCHAR(255)
+);
+
+ALTER TABLE Mensa ADD CONSTRAINT PK_Mensa PRIMARY KEY (ID);
+
+
+CREATE TABLE Menu (
+ ID INT NOT NULL,
+ starter INT NOT NULL,
+ main_dish INT NOT NULL,
+ dessert INT NOT NULL,
+ name CHAR(10),
+ price CHAR(10)
+);
+
+ALTER TABLE Menu ADD CONSTRAINT PK_Menu PRIMARY KEY (ID,starter,main_dish,dessert);
+
+
+CREATE TABLE Storage (
+ ID INT NOT NULL,
+ ID_ingredient INT NOT NULL,
+ quantity INT
+);
+
+ALTER TABLE Storage ADD CONSTRAINT PK_Storage PRIMARY KEY (ID,ID_ingredient);
+
+
+CREATE TABLE Vendor (
+ ID INT NOT NULL,
+ adress VARCHAR(255)
+);
+
+ALTER TABLE Vendor ADD CONSTRAINT PK_Vendor PRIMARY KEY (ID);
+
+
+CREATE TABLE Day (
+ ID INT NOT NULL,
+ menu_ID INT,
+ starter INT,
+ date CHAR(10)
+);
+
+ALTER TABLE Day ADD CONSTRAINT PK_Day PRIMARY KEY (ID);
+
+
+CREATE TABLE IngredientSpeise (
+ ID_meal INT NOT NULL,
+ ID INT NOT NULL,
+ quantity FLOAT NOT NULL
+);
+
+ALTER TABLE IngredientSpeise ADD CONSTRAINT PK_IngredientSpeise PRIMARY KEY (ID_meal,ID);
+
+
+CREATE TABLE Order (
+ ID INT NOT NULL,
+ ID_vendor INT NOT NULL,
+ date_ordered TIMESTAMP,
+ date_delivered TIMESTAMP,
+);
+
+-- ALTER TABLE Order ADD CONSTRAINT PK_Order PRIMARY KEY (ID,ID_vendor);
+
+
+CREATE TABLE Orderinclude (
+ ID INT NOT NULL,
+ ID_order INT NOT NULL,
+ ID_ingredient INT NOT NULL,
+ quantity CHAR(10),
+ price CHAR(10)
+);
+
+ALTER TABLE Orderinclude ADD CONSTRAINT PK_Orderinclude PRIMARY KEY (ID,ID_order,ID_ingredient);
+
+
+CREATE TABLE Bill (
+ ID INT NOT NULL,
+ ID_order INT NOT NULL,
+ ID_vendor INT NOT NULL,
+ IBAN CHAR(10),
+ BIC CHAR(10),
+ total_sum CHAR(10)
+);
+
+ALTER TABLE Bill ADD CONSTRAINT PK_Bill PRIMARY KEY (ID,ID_order,ID_vendor);
+
+
+ALTER TABLE MealIngredient ADD CONSTRAINT FK_MealIngredient_0 FOREIGN KEY (ID_meal) REFERENCES Meal (ID);
+ALTER TABLE MealIngredient ADD CONSTRAINT FK_MealIngredient_1 FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID);
+
+
+ALTER TABLE Menu ADD CONSTRAINT FK_Menu_0 FOREIGN KEY (starter) REFERENCES Meal (ID);
+ALTER TABLE Menu ADD CONSTRAINT FK_Menu_1 FOREIGN KEY (main_dish) REFERENCES Meal (ID);
+ALTER TABLE Menu ADD CONSTRAINT FK_Menu_2 FOREIGN KEY (dessert) REFERENCES Meal (ID);
+
+
+ALTER TABLE Storage ADD CONSTRAINT FK_Storage_0 FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID);
+
+
+ALTER TABLE Day ADD CONSTRAINT FK_Day_0 FOREIGN KEY (menu_ID,starter) REFERENCES Menu (ID,starter);
+
+
+ALTER TABLE IngredientSpeise ADD CONSTRAINT FK_IngredientSpeise_0 FOREIGN KEY (ID_meal) REFERENCES Meal (ID);
+ALTER TABLE IngredientSpeise ADD CONSTRAINT FK_IngredientSpeise_1 FOREIGN KEY (ID) REFERENCES Ingredient (ID);
+
+
+ALTER TABLE Order ADD CONSTRAINT FK_Order_0 FOREIGN KEY (ID_vendor) REFERENCES Vendor (ID);
+
+
+ALTER TABLE Orderinclude ADD CONSTRAINT FK_Orderinclude_0 FOREIGN KEY (ID,ID_order) REFERENCES Order (ID,ID_vendor);
+ALTER TABLE Orderinclude ADD CONSTRAINT FK_Orderinclude_1 FOREIGN KEY (ID_ingredient) REFERENCES Ingredient (ID);
+
+
+ALTER TABLE Bill ADD CONSTRAINT FK_Bill_0 FOREIGN KEY (ID_order,ID_vendor) REFERENCES Order (ID,ID_vendor);
+
+
