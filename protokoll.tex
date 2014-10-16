@@ -5,6 +5,7 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{ulem}
+\usepackage{placeins}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{listings}
 \usepackage{glossaries}
@@ -60,8 +61,8 @@ Hannah \textsc{Siegel}
 
 \section{Task description}
 \label{sec:aufgabenstellung}
-The Task description can be found under:
-
+The Task description can be found in elearning. Because we didn't want to translate it, it is not in this protocol. \\
+Basically, the task is about writing a little distributed database and run some test.
 \section{Working time}
 \subsection{Estimated working time}
 \begin{table}[h]
@@ -80,6 +81,7 @@ Total & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabular}[c]{c}13
 
 \end{tabular}
 \end{table}
+\newpage
 \subsection{Actual time}
 \begin{table}[h]
 \begin{tabular}{|p{0.6\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|}
@@ -93,17 +95,16 @@ Creating a Link & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabula
 Doing some inserts & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabular}[c]{c} 0.5\\ 0.5\end{tabular}   \\ \hline 
 Testing of some queries & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabular}[c]{c} 0.5\\ 0.5\end{tabular}   \\ \hline 
 Documentation & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabular}[c]{c} 1\\ 2\end{tabular}   \\ \hline \hline
-Total & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabular}[c]{c}XXX\\XXX\end{tabular}   \\ \hline 
-\textbf{Total Team} & & \textbf{XXX hours}  \\ \hline 
+Total & \begin{tabular}[c]{c}Aly\\ Siegel\end{tabular} & \begin{tabular}[c]{c}9\\9\end{tabular}   \\ \hline 
+\textbf{Total Team} & & \textbf{18 hours}  \\ \hline 
 \end{tabular}
 \end{table}
-
-\section{Theoretical Background}
-\todo{hannah}
+\FloatBarrier
+\newpage
 \section{Implementation}
 \subsection{Database-design}
 \subsubsection{Understanding the Task}
-We copied the task description from section \ref{sec:aufgabenstellung} into an word document. 
+We copied the task description which can be found in elearning into an word document. 
 Then we were deleting all the superficial information, until we had some sort of inofficial RM: \\
 \\
 \textbf{Meal}(\underline{ID}, name, type {starter, main\_dish,dessert}) \\
@@ -123,7 +124,7 @@ We decided to use Astah. We have never used it before and so it was a little bit
 In figure \ref{fig:try1} our first database design can be seen.
  \begin{figure}[here!]
 	\centering
-	%\includegraphics[width=1.0\textwidth]{pictures/er_vorlaeufig.png}
+	\includegraphics[width=1.0\textwidth]{images/er_vorlaeufig.png}
 	\caption{The first try to make an working ER-Diagram with Astah}
 	\label{fig:try1}
 	\end{figure}
@@ -131,13 +132,13 @@ In figure \ref{fig:try1} our first database design can be seen.
 In figure \ref{fig:try2} our second database design can be seen. 
  \begin{figure}[here!]
 	\centering
-	%\includegraphics[width=1.0\textwidth]{images/neu.png}
+	\includegraphics[width=1.0\textwidth]{images/neu.png}
 	\caption{The second try to make an ER-Diagram using Astah}
 	\label{fig:try2}
 	\end{figure}	
 
 After trying it for the second time to get the ER right, we decided that we will simply use the last \gls{er}-diagram and to change the little faults in the \gls{ddl} manually.
-	
+\FloatBarrier	
 \subsubsection{\gls{ddl}}
 Whenever using Astah, it is possible to export the \gls{er}-diagram into an \gls{sql} file. \\
 Unfortunately this didn't work out, because we were not able to import the file which has been exported by Astah.
@@ -156,9 +157,8 @@ Doing inserts in Distributed Databases was exactly the same as if we'd done it o
 \subsubsection{Fragmentation}
 Oracle doesn't support vertical fragmentation. \\ Therefore we had to use a horizontal fragmentation, and nothing had to be changed.
 \subsubsection{Creating a Link}
-Creating a Link was surprisingly easy, as it can be seen in figure \ref{fig:endres}.
-All we had to do was running:
-\todo{}
+Creating a Link was surprisingly easy, as it can be seen in figure \ref{fig:endres}. \\
+All we had to do was running: \\
 \texttt{CREATE PUBLIC DATABASE LINK <remote-name> CONNECT TO <user> IDENTIFIED BY <password> USING '//<ip>:<port>/<service-name>';}
 \subsubsection{Running some Selects}
 Whenever a select statement should be done on a distributed database, the second database must be addressed using its link and an union:
@@ -167,7 +167,7 @@ The output of one of these selects can be seen in figure \ref{fig:endres}
 
  \begin{figure}[here!]
 	\centering
-	%\includegraphics[width=1.0\textwidth]{images/neu.png}
+	\includegraphics[width=1.0\textwidth]{images/endres.jpg}
 	\caption{Setting up a link and making a select}
 	\label{fig:endres}
 	\end{figure}	
